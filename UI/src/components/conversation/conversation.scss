@@ -1,0 +1,69 @@
+$green: #86BB71;
+$blue: #94C2ED;
+$orange: #E38968;
+$gray: #92959E;
+
+.chat {
+    width: 100%;
+    height: 515px;
+    float:left;
+    background: #F2F5F8;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    color: #434651;
+    
+    
+    
+    .chat-history {
+      padding: 30px 30px 20px;
+      border-bottom: 2px solid white;
+      overflow-y: scroll;
+      height: 315px;
+    }
+    
+    .chat-message {
+      padding: 15px;
+      
+      textarea {
+        width: 90%;
+        border: none;
+        padding: 10px 20px;
+        font: 14px/22px "Lato", Arial, sans-serif;
+        margin-bottom: 10px;
+        border-radius: 5px;
+        resize: none;
+        
+      }
+      
+      .fa-file-o, .fa-file-image-o {
+        font-size: 16px;
+        color: gray;
+        cursor: pointer;
+        
+      }
+      
+      button {
+        float: right;
+        color: $blue;
+        font-size: 25px;
+        margin-top: -60px;
+        margin-right:-10px;
+        text-transform: uppercase;
+        border: none;
+        cursor: pointer;
+        font-weight: bold;
+        background: #F2F5F8;
+        
+        &:hover {
+          color: darken($blue, 7%);
+        }
+      }
+      form{
+        height: 100%;
+        textarea{
+          height: 50px;
+        }
+      }
+    }
+
+  }

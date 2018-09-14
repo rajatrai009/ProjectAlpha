@@ -6,13 +6,17 @@ import FaSearch from '../../../node_modules/react-icons/lib/fa/search';
 
 export default class UserList extends Component {
     constructor(props) {
+        //super(props) would pass props to the parent constructor
         super(props);
+        // local state of the class
         this.state = {
             activeChat: this.props.activeUser,
             MTAunread: this.props.MTAunread,
             unread: this.props.unread,
         }
     }
+    
+    //Handler for multiple channels
     channelSelectHandler = (userName) => {
         this.setState({
             activeChat: userName
@@ -22,6 +26,7 @@ export default class UserList extends Component {
         })
 
     }
+    //Lifecycle method to set new props to the state
     componentWillReceiveProps(nextProps) {
         this.setState({
             MTAunread: nextProps.MTAunread,

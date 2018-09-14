@@ -5,12 +5,15 @@ import Conversation from './components/conversation/conversation';
 
 // import './index.scss'
 
+
+// The higher order component that combines all major components of the application
 class App extends Component {
   constructor(props) {
     super(props);
+    // local state of the class
     this.state = {
       userID: Math.round(Math.random() * 1000000).toString(),
-      userName: "Sarah Porter",
+      userName: "Sarah Porter", //Hardcoded user
       history: [],
       MTAhistory: [],
       MTAunread: 0,
@@ -19,9 +22,12 @@ class App extends Component {
 
     }
   }
+  // Toggle Handler
   handleToggle = () => this.setState({ drawerState: !this.state.drawerState });
 
   handleClose = () => this.setState({ drawerState: false });
+
+  //Lifecycle method to subscribe to pubnub channel as soon the application has been mounted
   componentDidMount() {
     this.PubNub = PUBNUB.init({
       publish_key: 'pub-c-e2f048dc-74a5-4283-a99d-c54f98734cb0',
@@ -32,14 +38,9 @@ class App extends Component {
     this.PubNub.subscribe({
       channel: 'ReactChat',
       message: (message) => {
-        console.log("Received", message);
-
         this.setState({
           history: this.state.history.concat(message),
           unread: this.state.unread + 1
-        }, () => {
-          console.log(this.state.unread);
-
         })
       }
       ,
@@ -47,8 +48,6 @@ class App extends Component {
     this.PubNub.subscribe({
       channel: 'MTA',
       message: (message) => {
-        console.log("Received", message);
-
         this.setState({
           MTAhistory: this.state.MTAhistory.concat(message),
           MTAunread: this.state.MTAunread + 1,
@@ -57,6 +56,7 @@ class App extends Component {
       ,
     });
   }
+  //Publishing to the pubnub channel
   sendMessage = (message) => {
     console.log('sendMessage', message);
     if (this.state.userName == "MTA") {
@@ -95,27 +95,11 @@ class App extends Component {
     return (
 
       <div className="chat-bubble">
-        <button onClick={this.openSideMenu}>Click ME!</button>
+        <button onClick={this.openSideMenu}>Click ME!</button> 
         <div className={'side-menu ' + (this.state.showSideMenu ? 'open' : 'hidden')}>
-        {/* <h1>Hello</h1> */}
           <UserList click={this.channelHandler} activeUser={this.state.userName} MTAunread={this.state.MTAunread} unread={this.state.unread} closeSideMenu={this.closeSideMenu} />
         </div>
         <Conversation history={this.state.history} user={this.state.userName} MTAhistory={this.state.MTAhistory} sendMessage={this.sendMessage} />
-        {/* <div>
-          <RaisedButton
-            label="Open Drawer"
-            onClick={this.handleToggle}
-          />
-          <Drawer
-            docked={false}
-            width={200}
-            open={this.state.drawerState}
-            onRequestChange={(open) => this.setState({ open })}
-          >
-            <MenuItem onClick={this.handleClose}>Menu Item</MenuItem>
-            <MenuItem onClick={this.handleClose}>Menu Item 2</MenuItem>
-          </Drawer>
-        </div> */}
       </div>
 
 

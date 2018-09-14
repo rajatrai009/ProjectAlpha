@@ -7,13 +7,14 @@ import FaShareSquare from '../../../node_modules/react-icons/lib/fa/share-square
 
 export default class Conversation extends Component {
     constructor(props) {
+        //super(props) would pass props to the parent constructor
         super(props);
         this.state = {
             sideMenu: false
         }
     }
+    // Send Message Handler 
     onSend = (e) => {
-
         e.preventDefault();
         console.log(e)
         const message = this.refs.txtMessage.value;
@@ -21,7 +22,7 @@ export default class Conversation extends Component {
             return;
         }
         const messageObj = {
-            Who: "Ayushi Jain",
+            Who: "Ayushi Jain", //Hardcoded 
             What: message,
             When: new Date().valueOf(),
             To: this.props.user
@@ -30,9 +31,11 @@ export default class Conversation extends Component {
         this.refs.txtMessage.value = '';
         this.refs.txtMessage.focus();
     }
+    
     componentDidMount() {
         this.refs.txtMessage.focus();
     }
+    // SideBar Handler
     sidebarToggleOpen = () => {
         this.setState({
             sideMenu: true

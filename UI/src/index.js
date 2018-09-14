@@ -5,6 +5,9 @@ import './index.scss';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import App from './App';
 
+
+// Mounting the React Application
+
 // ReactDOM.render(
 //         <BrowserRouter>
 //             <App />
@@ -12,6 +15,7 @@ import App from './App';
 //     , document.getElementById('root'));
 // // registerServiceWorker();
 
+// Mounting the application to a HTML Page
 window.mount = function () {
     ReactDOM.render(
         <BrowserRouter>
